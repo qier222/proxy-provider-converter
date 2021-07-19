@@ -3,9 +3,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^11.0.1",
+    "@splitbee/web": "^0.2.4",
     "@heroicons/react": "^1.0.2",
     "axios": "^0.21.1",
     "next": "latest",
@@ -13,7 +16,8 @@
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^17.0.2",
     "react-hot-toast": "^2.0.0",
-    "yaml": "^1.10.2"
+    "yaml": "^1.10.2",
+    "preact": "^10.5.14"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
