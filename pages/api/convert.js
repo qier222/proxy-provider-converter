@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
   let config = null;
   try {
     config = YAML.parse(configFile);
+    console.log(`👌 Parsed YAML`);
   } catch (error) {
     res.status(500).send(`Unable parse config, error: ${error}`);
     return;
@@ -39,6 +40,7 @@ module.exports = async (req, res) => {
       ["ss", "vmess", "trojan"].includes(proxy.type)
     );
     const surgeProxies = supportedProxies.map((proxy) => {
+      console.log(proxy.server);
       const common = `${proxy.name} = ${proxy.type}, ${proxy.server}, ${proxy.port}`;
       if (proxy.type === "ss") {
         // ProxySS = ss, example.com, 2021, encrypt-method=xchacha20-ietf-poly1305, password=12345, obfs=http, obfs-host=example.com, udp-relay=true
@@ -50,14 +52,14 @@ module.exports = async (req, res) => {
         }
         let result = `${common}, encrypt-method=${proxy.cipher}, password=${proxy.password}`;
         if (proxy.plugin === "obfs") {
-          const mode = proxy["plugin-opts"].mode;
-          const host = proxy["plugin-opts"].host;
+          const mode = proxy?.["plugin-opts"].mode;
+          const host = proxy?.["plugin-opts"].host;
           result = `${result}, obfs=${mode}${
             host ? `, obfs-host=example.com ${host}` : ""
           }`;
         }
         if (proxy.udp) {
-          result = `${result}, udp-relay=${roxy.udp}`;
+          result = `${result}, udp-relay=${proxy.udp}`;
         }
         return result;
       } else if (proxy.type === "vmess") {

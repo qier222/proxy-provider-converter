@@ -121,36 +121,37 @@ ${urlHost || "egroup"} = select, policy-path=${convertedUrl}
           </div>
         </div>
         {url && (
-          <CopyToClipboard text={convertedUrl} onCopy={() => copiedToast()}>
-            <div className="break-all p-3 mt-4 rounded-lg text-gray-100 bg-gray-900 shadow-sm cursor-pointer">
-              {convertedUrl}
-              <div className="flex items-center text-sm mt-2 text-gray-400 ">
+          <div className="break-all p-3 mt-4 rounded-lg text-gray-100 bg-gray-900 shadow-sm w-full">
+            {convertedUrl}
+
+            <CopyToClipboard text={convertedUrl} onCopy={() => copiedToast()}>
+              <div className="flex items-center text-sm mt-4 text-gray-400  cursor-pointer  hover:text-gray-300 transition duration-200 select-none">
                 <DuplicateIcon className="h-5 w-5 mr-1 inline-block" />
                 点击复制
               </div>
-            </div>
-          </CopyToClipboard>
+            </CopyToClipboard>
+          </div>
         )}
         {url && (
-          <CopyToClipboard
-            text={target === "surge" ? surgeConfig : clashConfig}
-            onCopy={() => copiedToast()}
-          >
-            <div className="w-full p-4 mt-4 text-gray-100 bg-gray-900 rounded-lg hidden md:block cursor-pointer">
-              {/* prettier-ignore */}
-              {target !== "surge" && (
-                <pre className="whitespace-pre-wrap">{clashConfig}</pre>
-              )}
+          <div className="w-full p-4 mt-4 text-gray-100 bg-gray-900 rounded-lg hidden md:block">
+            {/* prettier-ignore */}
+            {target !== "surge" && (
+              <pre className="whitespace-pre-wrap">{clashConfig}</pre>
+            )}
 
-              {target === "surge" && <pre>{surgeConfig}</pre>}
-              {/* prettier-ignore */}
+            {target === "surge" && <pre>{surgeConfig}</pre>}
+            {/* prettier-ignore */}
 
-              <div className="flex items-center text-sm mt-4 text-gray-400">
+            <CopyToClipboard
+              text={target === "surge" ? surgeConfig : clashConfig}
+              onCopy={() => copiedToast()}
+            >
+              <div className="flex items-center text-sm mt-4 text-gray-400 cursor-pointer hover:text-gray-300 transition duration-200 select-none">
                 <DuplicateIcon className="h-5 w-5 mr-1 inline-block" />
                 点击复制
               </div>
-            </div>
-          </CopyToClipboard>
+            </CopyToClipboard>
+          </div>
         )}
         <div className="w-full text-gray-900 mt-14">
           <h3 className="text-lg md:text-xl font-bold">
