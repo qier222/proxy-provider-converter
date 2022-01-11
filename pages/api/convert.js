@@ -13,7 +13,13 @@ module.exports = async (req, res) => {
   console.log(`Fetching url: ${url}`);
   let configFile = null;
   try {
-    const result = await axios(url);
+    const result = await axios({
+      url,
+      headers: {
+        "User-Agent":
+          "ClashX Pro/1.72.0.4 (com.west2online.ClashXPro; build:1.72.0.4; macOS 12.0.1) Alamofire/5.4.4",
+      },
+    });
     configFile = result.data;
   } catch (error) {
     res.status(400).send(`Unable to get url, error: ${error}`);
