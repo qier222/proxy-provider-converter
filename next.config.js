@@ -1,8 +1,12 @@
+const withPlugins = require('next-compose-plugins');
+
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-module.exports = withBundleAnalyzer({
+const isProd = process.env.NODE_ENV === 'production'
+
+module.exports = withPlugins([[withBundleAnalyzer, {
   swcMinify: true,
   webpack(config, { dev, isServer }) {
     // Replace React with Preact only in client production build
@@ -28,4 +32,10 @@ module.exports = withBundleAnalyzer({
       },
     ];
   },
+}]], {
+  env: {
+    STATIC_URL: isProd ? process.env.STATIC_URL : ''
+  },
+  assetPrefix: isProd ? process.env.STATIC_URL : '',
+  trailingSlash: true
 });
