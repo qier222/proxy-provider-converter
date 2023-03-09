@@ -1,0 +1,24 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+jobs:
+  build-push-docker: # This is the name of the job, feel free to change it to better match what you're trying to do!
+    docker:
+      - image: cimg/base:2023.03
+        auth:
+          username: wildcloud
+          password: $DOCKERHUB_PWD
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker build -t wildcloud/ppc:$CIRCLE_SHA1 .
+      - run: docker image tag wildcloud/ppc:$CIRCLE_SHA1 wildcloud/ppc:latest
+      - run: echo $DOCKERHUB_PWD | docker login -u wildcloud --password-stdin
+      - run: docker push wildcloud/ppc:$CIRCLE_SHA1
+      - run: docker push wildcloud/ppc:latest
+
+workflows:
+  buildpush: # This is the name of the workflow, feel free to change it to better match your workflow.
+    jobs:
+      - build-push-docker
