@@ -1,25 +1,30 @@
 # Proxy Provider Converter
 
-一个可以将 Clash 订阅转换成 Proxy Provider 和 External Group(Surge) 的工具
+一个把 Clash/Surge 订阅转换成 Proxy Provider（Clash）或 External Group（Surge）的工具。
 
-[https://proxy-provider-converter.vercel.app](https://proxy-provider-converter.vercel.app)
+访问地址：`https://proxy-provider-converter.vercel.app`
 
-### 什么是 Proxy Provider 和 External Group？
+## 它能帮你做什么
 
-[Proxy Provider](https://github.com/Dreamacro/clash/wiki/configuration#proxy-providers) 是 Clash 的一项功能，可以让用户从指定路径动态加载代理服务器列表。使用这个功能你可以将 Clash 订阅里面的代理服务器提取出来，放到你喜欢的配置文件里，也可以将多个 Clash 订阅里的代理服务器混合到一个配置文件里。External Group 则是 Proxy Provider 在 Surge 里的叫法，作用是一样的。
+- **拆分订阅为节点列表**：将整个 Clash 订阅转换为可复用的节点清单，方便在配置文件中引用。
+- **合并多个订阅**：汇总多个订阅的节点，实现统一管理。
+- **兼容 Clash 与 Surge**：一键生成 Clash 的 Proxy Provider 或 Surge 的 External Group。
+- **订阅与规则解耦**：节点来源可使用他人订阅（通过 Provider/External Group 引用），规则策略可在配置中自由编写和维护。
 
-### 怎么自己部署转换工具？
+## 快速使用
 
-你可以根据下面步骤你可以零成本部署一个属于你的转换工具。
+1. 打开网站：`https://proxy-provider-converter.vercel.app`
+2. 粘贴你的 Clash 或 Surge 订阅链接
+3. 选择输出类型：Clash Proxy Provider 或 Surge External Group
+4. 点击转换，复制结果到你的配置文件中即可
 
-前期准备：你需要一个 GitHub 账号
+## 自己部署
 
-1. 点击右上角的 Fork 按钮
-2. 打开 [Vercel.com](https://vercel.com)，使用 GitHub 登录。
-3. 选择 New Project，点击 proxy-provider-converter 旁边的 Import 按钮, 点击 PERSONAL ACCOUNT 旁边的 Select，最后点击 Deploy
-4. 等待部署完成后点击 Vercel 项目面板上的 Visit 按钮就可以访问你部署的版本了
+使用公共站点时，站点拥有者可能看到你的订阅地址；如不希望暴露，可按下列步骤零成本自建你的专属转换工具。
 
-### 资源
+前提：需要一个 GitHub 账号。
 
-- [Clash Wiki 中的 Proxy Providers 章节](https://github.com/Dreamacro/clash/wiki/configuration#proxy-providers)
-- [Surge Policy Group 文档](https://manual.nssurge.com/policy/group.html)
+1. 点右上角 Fork，把项目复制到你的 GitHub
+2. 登录 [Vercel](https://vercel.com) 并关联 GitHub
+3. 选择 New Project → 找到 `proxy-provider-converter` → Import → 选择账号 → Deploy
+4. 部署完成后，点 Visit 访问你的专属工具

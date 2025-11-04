@@ -1,3 +1,10 @@
+:root {
+  text-autospace: normal;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC,
+    Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+}
+
 @font-face {
   font-family: "Inter";
   font-style: normal;
@@ -10,8 +17,5 @@
 }
 
 html {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC,
-    Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
   background: rgba(243, 244, 246, 1);
 }
